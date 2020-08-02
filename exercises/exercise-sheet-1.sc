@@ -35,6 +35,7 @@ val mult = multiplyInts(List(1, 2, 3, 4))
 val sumEngine = mathsEngine(List(1, 2, 3, 4), sumInts)
 val multEngine = mathsEngine(List(1, 2, 3, 4), multiplyInts)
 
+
 /**
 3) Polymorphism
   Context: Assume a Predator's average speed is determined simply by the Predator's
@@ -60,10 +61,17 @@ case class Lion(age: Int) extends Predator {
   override val maxSpeed: Int = 30
 }
 
-def eatOrBeEaten = {
-  //take a human's speed & a predator as function parameters
-  ???
+def eatOrBeEaten(humSpeed: Int, pred: Predator): String = {
+  pred.maxSpeed match {
+    case predSpeed if humSpeed > predSpeed => "eat"
+    case _ => "be eaten"
+  }
 }
+
+val resEatenCheetah = eatOrBeEaten(15, Cheetah(3))
+val resEatCheetah = eatOrBeEaten(25, Cheetah(3))
+val resEatenLion = eatOrBeEaten(25, Lion(4))
+val resEatLion = eatOrBeEaten(35, Lion(4))
 
 
 /**
