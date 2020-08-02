@@ -13,7 +13,7 @@
   */
 val numbers = List(List("123", "456", "7"), List("10", "34", "9"), List("32", "54"))
 
-val result: Int = ???
+val result: Int = numbers.flatten.map(_.toInt).sum
 
 
 /**
@@ -24,14 +24,16 @@ val result: Int = ???
   c) mathsEngine(), that should be able to take a list of integers (List[Int]) as well as any
      other function (sumInts() or multiplyInts()) and apply that function a given list on integers.
   */
-def sumInts(ints: List[Int]): Int = ???
+def sumInts(ints: List[Int]): Int = ints.sum
 
-def multiplyInts(ints: List[Int]): Int = ???
+def multiplyInts(ints: List[Int]): Int = ints.product
 
-def mathsEngine(ints: List[Int], mathFunction: ???): Int = {
-  ???
-}
+def mathsEngine(ints: List[Int], mathFunction: List[Int] => Int): Int = mathFunction(ints)
 
+val sum = sumInts(List(1, 2, 3, 4))
+val mult = multiplyInts(List(1, 2, 3, 4))
+val sumEngine = mathsEngine(List(1, 2, 3, 4), sumInts)
+val multEngine = mathsEngine(List(1, 2, 3, 4), multiplyInts)
 
 /**
 3) Polymorphism
