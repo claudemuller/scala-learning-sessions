@@ -84,14 +84,32 @@ val resEatLion = eatOrBeEaten(35, Lion(4))
   this in the sumOptionsMap() function.
   */
 def sumOptionsFor(num1Opt: Option[Int], num2Opt: Option[Int], num3Opt: Option[Int]): Option[Int] = {
-  //implement using For-Comp.
-  ???
+  val options: List[Option[Int]] = List(num1Opt, num2Opt, num3Opt)
+  var sum = 0
+  for (n <- options) {
+    n match {
+      case Some(n) => sum = sum + n
+      case None =>
+    }
+  }
+  Option(sum)
 }
 
+val n10 = Option(2)
+val n20 = None
+val n30 = Option(3)
+println(sumOptionsFor(n10, n20, n30))
+
 def sumOptionsMap(num1Opt: Option[Int], num2Opt: Option[Int], num3Opt: Option[Int]): Option[Int] = {
-  //implement using map & flatmap
-  ???
+  val options: List[Option[Int]] = List(num1Opt, num2Opt, num3Opt)
+  val sum: List[Int] = options map {
+    case Some(n) => n
+    case None => 0
+  }
+  Option(sum.sum)
 }
+
+println(sumOptionsMap(n10, n20, n30))
 
 
 /**
@@ -130,6 +148,10 @@ def useBoth(rule: Rule, outcome: Outcome): List[Action] = {
 }
 
 def interpretRow(row: Ingestion): List[Action] = {
-  //Implement this function using pattern matching
-  ???
+  row match {
+    case Ingestion(x: Some[Rule], None) => useRule(x.get)
+    case Ingestion(None, y: Some[Outcome]) => useOutcome(y.get)
+    case Ingestion(x: Some[Rule], y: Some[Outcome]) => useBoth(x.get, y.get)
+    case _ => List()
+  }
 }
