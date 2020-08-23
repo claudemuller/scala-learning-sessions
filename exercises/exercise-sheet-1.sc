@@ -13,7 +13,13 @@
   */
 val numbers = List(List("123", "456", "7"), List("10", "34", "9"), List("32", "54"))
 
-val result: Int = numbers.flatten.map(_.toInt).sum
+val result: List[String] = numbers.flatten
+val fin: Option[Int] = Try(result.flatMap(_.toInt).sum).toInt
+// Try results in Success or Failure
+// therefore:
+//   fin = Some(10)
+// Or..
+//   fin = None
 
 
 /**
