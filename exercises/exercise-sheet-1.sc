@@ -62,10 +62,8 @@ case class Lion(age: Int) extends Predator {
 }
 
 def eatOrBeEaten(humSpeed: Int, pred: Predator): String = {
-  pred.maxSpeed match {
-    case predSpeed if humSpeed > predSpeed => "eat"
-    case _ => "be eaten"
-  }
+  if (humSpeed > pred.maxSpeed) "eat"
+  else "be eaten"
 }
 
 val resEatenCheetah = eatOrBeEaten(15, Cheetah(3))
@@ -84,15 +82,11 @@ val resEatLion = eatOrBeEaten(35, Lion(4))
   this in the sumOptionsMap() function.
   */
 def sumOptionsFor(num1Opt: Option[Int], num2Opt: Option[Int], num3Opt: Option[Int]): Option[Int] = {
-  val options: List[Option[Int]] = List(num1Opt, num2Opt, num3Opt)
-  var sum = 0
-  for (n <- options) {
-    n match {
-      case Some(n) => sum = sum + n
-      case None =>
-    }
-  }
-  Option(sum)
+  for {
+    a <- num1Opt
+    b <- num2Opt
+    c <- num3Opt
+  } yield a + b + c
 }
 
 val n10 = Option(2)
@@ -100,14 +94,15 @@ val n20 = None
 val n30 = Option(3)
 println(sumOptionsFor(n10, n20, n30))
 
-def sumOptionsMap(num1Opt: Option[Int], num2Opt: Option[Int], num3Opt: Option[Int]): Option[Int] = {
-  val options: List[Option[Int]] = List(num1Opt, num2Opt, num3Opt)
-  val sum: List[Int] = options map {
-    case Some(n) => n
-    case None => 0
-  }
-  Option(sum.sum)
-}
+def sumOptionsMap(num1Opt: Option[Int], num2Opt: Option[Int], num3Opt: Option[Int]): Option[Int] = Option(num1Opt map (
+//  Some(num1Opt map { a: Int =>
+//    num2Opt map { b: Int =>
+//      num3Opt map { c: Int =>
+//        c
+//      } + b
+//    } + a
+//  })
+))
 
 println(sumOptionsMap(n10, n20, n30))
 
