@@ -100,15 +100,7 @@ val n20 = None
 val n30 = Option(3)
 println(sumOptionsFor(n10, n20, n30))
 
-def sumOptionsMap(num1Opt: Option[Int], num2Opt: Option[Int], num3Opt: Option[Int]): Option[Int] = Option(num1Opt map (
-//  Some(num1Opt map { a: Int =>
-//    num2Opt map { b: Int =>
-//      num3Opt map { c: Int =>
-//        c
-//      } + b
-//    } + a
-//  })
-))
+def sumOptionsMap(num1Opt: Option[Int], num2Opt: Option[Int], num3Opt: Option[Int]): Option[Int] = ???
 
 println(sumOptionsMap(n10, n20, n30))
 
@@ -150,9 +142,9 @@ def useBoth(rule: Rule, outcome: Outcome): List[Action] = {
 
 def interpretRow(row: Ingestion): List[Action] = {
   row match {
-    case Ingestion(x: Some[Rule], None) => useRule(x.get)
-    case Ingestion(None, y: Some[Outcome]) => useOutcome(y.get)
-    case Ingestion(x: Some[Rule], y: Some[Outcome]) => useBoth(x.get, y.get)
+    case Ingestion(r: Some[Rule], None) => useRule(r.get)
+    case Ingestion(None, o: Some[Outcome]) => useOutcome(o.get)
+    case Ingestion(r: Some[Rule], o: Some[Outcome]) => useBoth(r.get, o.get)
     case _ => List()
   }
 }
